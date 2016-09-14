@@ -1,9 +1,17 @@
 <?php
 namespace MyPlugin\Controllers;
-class HomeController{
-    public function index(){
 
-    print_r(wp_get_current_user());
+use Herbert\Framework\Models\Post;
+use Illuminate\Database\Capsule\Manager as Capsule;
+use MyPlugin\Models\Data;
+
+class HomeController
+{
+    public function index()
+    {
+        Capsule::table('qdata')->insert(['name'=>'prappo']);
+        return "done";
+
     }
 
 
