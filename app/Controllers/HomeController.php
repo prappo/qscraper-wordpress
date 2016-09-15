@@ -9,9 +9,9 @@ class HomeController
 {
     public function index()
     {
-        $user = get_role('quser');
-        $user->add_cap('qscraper');
-
+//        $user = get_role('quser');
+//        $user->add_cap('qscraper');
+//
 //        $result = add_role(
 //            'quser',
 //            __('Qscraper User'),
@@ -25,6 +25,9 @@ class HomeController
 //        } else {
 //            echo 'Oh... the basic_contributor role already exists.';
 //        }
+//
+
+
 
     }
 

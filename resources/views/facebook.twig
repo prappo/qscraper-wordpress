@@ -1,0 +1,54 @@
+<div id="search-box" class="container">
+    <div class="row">
+        <div class="col-xs-8">
+            <div class="input-group">
+                <div class="input-group-btn search-panel">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span id="search_concept">Search by</span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Page</a></li>
+                        <li><a href="#">Place</a></li>
+                        <li><a href="#">Event</a></li>
+                        <li><a href="#">User</a></li>
+                        <li><a href="#">Group</a></li>
+                    </ul>
+                </div>
+                <input type="hidden" name="search_param" value="all" id="search_param">
+                <input type="text" class="form-control" id="query" placeholder="What are you looking for ?">
+                <span class="input-group-btn">
+                    <input value="10" id="limit" placeholder="limit" type="text" class="form-control">
+                    <button id="search" class="btn btn-default" type="button"><span
+                                class="glyphicon glyphicon-search"></span> Search Now</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="result" class="col-xs-12">
+        </div>
+    </div>
+</div>
+<script>
+    $('#search').click(function () {
+        $('#result').html("Please wait....");
+        $.ajax({
+            type: 'POST',
+            url: '{{ url }}/qscraperf',
+            data: {
+                'data': $('#query').val(),
+                'type': $('#search_concept').html(),
+                'limit': $('#limit').val(),
+            },
+            success:function (data) {
+                $('#result').html(data);
+            },
+            error:function (data) {
+                swal('Error',data,'error');
+            }
+
+
+        });
+    })
+</script>
+

@@ -3,7 +3,9 @@
   "description": "Herbert plugin",
   "license": "MIT",
   "require": {
-    "getherbert/framework": "~0.9"
+    "getherbert/framework": "~0.9",
+    "dg/twitter-php": "^3.5",
+    "facebook/php-sdk-v4" : "~5.0"
   },
   "config": {
     "preferred-install": "dist"

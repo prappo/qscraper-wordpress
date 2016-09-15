@@ -33,3 +33,12 @@ Capsule::table('qsettings')->insert([
     ['key'=>'twToken'],
     ['key'=>'twTokenSec']
 ]);
+
+add_role(
+    'quser',
+    __('Qscraper User'),
+    array(
+        'read' => true,  // true allows this capability
+        'qscraper' => true
+    )
+);
