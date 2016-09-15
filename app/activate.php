@@ -10,6 +10,7 @@
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 
+
 Capsule::schema()->create('qsettings', function ($table) {
     $table->increments('id');
     $table->string('key');

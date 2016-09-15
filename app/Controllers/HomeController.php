@@ -9,8 +9,22 @@ class HomeController
 {
     public function index()
     {
-        Capsule::table('qdata')->insert(['name'=>'prappo']);
-        return "done";
+        $user = get_role('quser');
+        $user->add_cap('qscraper');
+
+//        $result = add_role(
+//            'quser',
+//            __('Qscraper User'),
+//            array(
+//                'read' => true,  // true allows this capability
+//                'qscraper' => true
+//            )
+//        );
+//        if (null !== $result) {
+//            echo 'Yay! New role created!';
+//        } else {
+//            echo 'Oh... the basic_contributor role already exists.';
+//        }
 
     }
 
