@@ -10,7 +10,7 @@ class FacebookController
     public function index()
     {
         $url = get_site_url();
-        return view('@MyPlugin/facebook.twig',['url'=>$url]);
+        return view('@MyPlugin/facebook.twig', ['url' => $url]);
     }
 
     public function scraper(Http $re)
@@ -18,7 +18,7 @@ class FacebookController
         $query = $re->data;
         $type = strtolower($re->type);
         $limit = $re->limit;
-        if($limit == ""){
+        if ($limit == "") {
             $limit = 10;
         }
 
@@ -543,5 +543,34 @@ class FacebookController
         } catch (\Exception $e) {
             return $e->getMessage();
         }
+        echo "<script>
+ var table = $('#mytable').DataTable({
+
+        dom: '<\"\"flB>tip',
+        buttons: [
+            {
+                extend: 'excel',
+                text: '<i class=\"fa fa-file-excel-o\"></i> Export all to excel'
+            },
+            {
+                extend: 'csv',
+                text: '<i class=\"fa fa-file-o\"></i> Export all to csv'
+            },
+            {
+                extend: 'pdf',
+                text: '<i class=\"fa fa-file-pdf-o\"></i> Export all to pdf'
+            },
+            {
+                extend: 'print',
+                text: '<i class=\"fa fa-print\"></i> Print all'
+            },
+            {
+                extend: 'colvis',
+                text: '<i class=\"fa fa-eye\"></i> Column visibility'
+            },
+        ]
+    });
+               </script>
+        ";
     }
 }

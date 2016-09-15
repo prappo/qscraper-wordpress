@@ -1,3 +1,4 @@
+<div id="facebook"></div>
 <div id="search-box" class="container">
     <div class="row">
         <div class="col-xs-8">
@@ -23,13 +24,15 @@
                 </span>
             </div>
         </div>
-    </div>
+    </div><br><br>
     <div class="row">
         <div id="result" class="col-xs-12">
         </div>
     </div>
 </div>
 <script>
+
+
     $('#search').click(function () {
         $('#result').html("Please wait....");
         $.ajax({
@@ -49,6 +52,9 @@
 
 
         });
-    })
+    });
+
+
 </script>
+
 
