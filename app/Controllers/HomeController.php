@@ -26,10 +26,7 @@ class HomeController
 //            echo 'Oh... the basic_contributor role already exists.';
 //        }
 //
-        foreach(get_users() as $users){
-            print_r($users->roles[0]);
-        }
-
+        echo get_site_url();
 
     }
 

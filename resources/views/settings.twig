@@ -25,7 +25,7 @@
                 </th>
                 <td>
 
-                    <a href="#" class="button button-secondary wp-generate-pw hide-if-no-js">Connect</a>
+                    <a href="{{ fburl }}" class="button button-secondary wp-generate-pw hide-if-no-js">Connect</a>
 
                 </td>
             </tr>
@@ -56,3 +56,35 @@
         <p class="submit"><input type="button" name="createuser" id="update" class="button button-primary" value="Update"></p>
     </form>
 </div>
+<script>
+    $('#update').click(function () {
+
+        $.ajax({
+            type: 'POST',
+            url: '{{ url }}/qsupdate',
+            data: {
+                'fbAppId': $('#fbAppId').val(),
+                'fbAppSec': $('#fbAppSec').val(),
+                'fbToken': $('#fbToken').val(),
+                'twConKey': $('#twConKey').val(),
+                'twConSec': $('#twConSec').val(),
+                'twToken': $('#twToken').val(),
+                'twTokenSec': $('#twTokenSec').val()
+            },
+            success:function (data) {
+                if(data == "success"){
+                    swal('Success','Settings updated','success');
+                    location.reload();
+                }
+                else{
+                    swal('Error',data,'error');
+                }
+            },
+            error:function (data) {
+                swal('Error',data,'error');
+            }
+
+
+        });
+    });
+</script>
