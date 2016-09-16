@@ -34,6 +34,9 @@
 
 
     $('#search').click(function () {
+        if($('#search_concept').html() == "Search by"){
+            return swal("Please select a category");
+        }
         $('#result').html("Please wait....");
         $.ajax({
             type: 'POST',

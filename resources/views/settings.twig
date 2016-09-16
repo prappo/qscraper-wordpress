@@ -1,0 +1,58 @@
+<div class="wrap">
+    <h1 id="add-new-user">Qscraper Settings</h1>
+
+
+    <div id="ajax-response"></div>
+
+    <p>Update social media settings</p>
+    <form  id="createuser" class="validate" novalidate="novalidate">
+
+       <table class="form-table">
+            <tbody>
+            <tr class="form-field">
+                <th scope="row"><label for="fbAppId">Facebook App Id </label></th>
+                <td><input type="text" id="fbAppId" value="{{ fbAppId }}"></td>
+            </tr>
+            <tr class="form-field">
+                <th scope="row"><label for="fbAppSec">Facebook App Secret </label></th>
+                <td><input type="text" id="fbAppSec" value="{{ fbAppSec }}"></td>
+            </tr>
+            <tr class="form-field form-required user-pass1-wrap">
+                <th scope="row">
+                    <label for="pass1-text">
+                        Connect with facebook
+                    </label>
+                </th>
+                <td>
+
+                    <a href="#" class="button button-secondary wp-generate-pw hide-if-no-js">Connect</a>
+
+                </td>
+            </tr>
+
+            <tr class="form-field">
+                <th scope="row"><label for="twConKey">Twitter Consumer Key </label></th>
+                <td><input type="text" id="twConKey" value="{{ twConKey }}"></td>
+            </tr>
+
+            <tr class="form-field">
+                <th scope="row"><label for="twConSec">Twitter Consumer Secret </label></th>
+                <td><input type="text" id="twConSec" value="{{ twConSec }}"></td>
+            </tr>
+
+            <tr class="form-field">
+                <th scope="row"><label for="twTokne">Twitter Token </label></th>
+                <td><input type="text" id="twTokne" value="{{ twToken }}"></td>
+            </tr>
+
+            <tr class="form-field">
+                <th scope="row"><label for="twTokenSec">Twitter Token Secret </label></th>
+                <td><input type="text" id="twTokenSec" value="{{ twTokenSec }}"></td>
+            </tr>
+
+            </tbody></table>
+
+
+        <p class="submit"><input type="button" name="createuser" id="update" class="button button-primary" value="Update"></p>
+    </form>
+</div>

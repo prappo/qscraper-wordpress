@@ -1,7 +1,10 @@
 <?php
 namespace MyPlugin\Controllers;
+use MyPlugin\Models\Data;
+
 class DatabaseController{
     public function index(){
-        return view('@MyPlugin/database.twig');
+        $datas = Data::all();
+        return view('@MyPlugin/database.twig',['datas'=>$datas]);
     }
 }

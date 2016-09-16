@@ -4,6 +4,7 @@ namespace MyPlugin\Controllers;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\Facebook;
 use Herbert\Framework\Http;
+use MyPlugin\Models\Data;
 
 class FacebookController
 {
@@ -15,6 +16,20 @@ class FacebookController
 
     public function scraper(Http $re)
     {
+        if(SettingsController::get('fbToken') == ""){
+            return "Facebook Token not found . Please go to <a href='admin.php?page=qscrapersettings'>settings page</a>";
+        }
+
+        if(SettingsController::get('fbAppSec') == ""){
+            return "Facebook App secret not found . Please go to <a href='admin.php?page=qscrapersettings'>settings page</a>";
+        }
+
+        if(SettingsController::get('fbAppId') == ""){
+            return "Facebook App Id not found . Please go to <a href='admin.php?page=qscrapersettings'>settings page</a>";
+        }
+
+
+
         $query = $re->data;
         $type = strtolower($re->type);
         $limit = $re->limit;
@@ -104,7 +119,7 @@ class FacebookController
                     }
 
 //                    Save phone and email into database
-                    if ($phone != "" && $emails != "") {
+                    if ($phone != "" || $emails != "") {
                         if (is_array($emails)) {
                             foreach ($emails as $email) {
                                 $em .= $email . " ";
@@ -113,14 +128,15 @@ class FacebookController
                         }
 
                         try {
-//                            if (!Data::where('name', $name)->exists()) {
-//                                $data = new Data();
-//                                $data->name = $name;
-//                                $data->phone = $phone;
-//                                $data->email = $em;
-//                                $data->save();
-//                                $em = "";
-//                            }
+                            if (!Data::where('name', $name)->exists()) {
+                                $data = new Data();
+                                $data->name = $name;
+                                $data->phone = $phone;
+                                $data->email = $em;
+                                $data->user = wp_get_current_user()->user_login;
+                                $data->save();
+                                $em = "";
+                            }
 
                         } catch (\Exception $e) {
                         }
@@ -132,7 +148,7 @@ class FacebookController
 //                    echo '<td>' . $id . '</td>';
                     echo '<td>' . $picture = isset($picture['data']['url']) ? "<img class='img-thumbnail' src='{$picture['data']['url']}'>" : 'Not found' . '</td>';
                     echo '<td><a target="_blank" href="' . $link . '">' . $name . '</a></td>';
-                    echo '<td>' . $phone = ($phone == "") ? "<span class='label label-danger'><i class='fa fa-times badge-danger'></i></span>" : $phone . '</td>';
+                    echo '<td>' . $phone = ($phone == "") ? "<span class='label label-danger'><i class='glyphicon glyphicon-remove badge-danger'></i></span>" : $phone . '</td>';
                     echo '<td>' . $website = (isset($website)) ? $website : 'Not found' . '</td>';
                     if (isset($location['country'])) {
                         foreach ($location as $field => $value) {
@@ -148,7 +164,7 @@ class FacebookController
                         }
                         echo '<td>' . $lo . '</td>';
                     } else {
-                        echo '<td>' . "<span class='label label-danger'><i class='fa fa-times badge-danger'></i></span>" . '</td>';
+                        echo '<td>' . "<span class='label label-danger'><i class='glyphicon glyphicon-remove badge-danger'></i></span>" . '</td>';
                     }
                     if (is_array($emails)) {
                         foreach ($emails as $email) {
@@ -156,7 +172,7 @@ class FacebookController
                         }
                         echo '<td>' . $em . '</td>';
                     } else {
-                        echo '<td> <span class=\'label label-danger\'><i class=\'fa fa-times badge-danger\'></i></span> </td>';
+                        echo '<td> <span class=\'label label-danger\'><i class=\'glyphicon glyphicon-remove badge-danger\'></i></span> </td>';
                     }
                     echo '<td>' . $likes . '</td>';
                     echo '<td>' . $about . '</td>';
@@ -232,7 +248,7 @@ class FacebookController
                     echo '<td>' . $age_range . '</td>';
                     echo '<td>' . $gender . '</td>';
                     echo '<td><a target="_blank" href="' . $link . '">Profile</a></td>';
-//                        echo '<td> <span class=\'label label-danger\'><i class=\'fa fa-times badge-danger\'></i></span> </td>';
+//                        echo '<td> <span class=\'label label-danger\'><i class=\'glyphicon glyphicon-remove badge-danger\'></i></span> </td>';
                     echo '</tr>';
                 }
                 echo '</tbody>
@@ -318,7 +334,7 @@ class FacebookController
                         }
                         echo '<td>' . $lo . '</td>';
                     } else {
-                        echo '<td>' . "<span class='label label-danger'><i class='fa fa-times badge-danger'></i></span>" . '</td>';
+                        echo '<td>' . "<span class='label label-danger'><i class='glyphicon glyphicon-remove badge-danger'></i></span>" . '</td>';
                     }
                     echo '<td>' . SettingsController::date($end_time) . '</td>';
                     echo '<td>' . $description . '</td>';
@@ -329,7 +345,7 @@ class FacebookController
                         '<span class="text-yellow">Noreply ' . $data['noreply_count'] . '</span><br>' .
                         '<span class="text-red">Declined ' . $data['declined_count'] . '</span><br>' .
                         '</td>';
-//                        echo '<td> <span class=\'label label-danger\'><i class=\'fa fa-times badge-danger\'></i></span> </td>';
+//                        echo '<td> <span class=\'label label-danger\'><i class=\'glyphicon glyphicon-remove badge-danger\'></i></span> </td>';
                     echo '</tr>';
                 }
                 echo '</tbody>
@@ -399,12 +415,12 @@ class FacebookController
                     if (isset($data['description'])) {
                         echo '<td>' . $data['description'] . '</td>';
                     } else {
-                        echo '<td> <span class=\'label label-danger\'><i class=\'fa fa-times badge-danger\'></i></span> </td>';
+                        echo '<td> <span class=\'label label-danger\'><i class=\'glyphicon glyphicon-remove badge-danger\'></i></span> </td>';
                     }
                     if (isset($data['owner'])) {
                         echo '<td><img src="' . $data['owner']['picture']['data']['url'] . '"><br>' . '<a target="_blank" href="' . $data['owner']['link'] . '">' . $data['owner']['name'] . '</a></td>';
                     } else {
-                        echo '<td> <span class=\'label label-danger\'><i class=\'fa fa-times badge-danger\'></i></span> </td>';
+                        echo '<td> <span class=\'label label-danger\'><i class=\'glyphicon glyphicon-remove badge-danger\'></i></span> </td>';
                     }
                     echo '<td><a target="_blank" href="https://facebook.com/' . $data['id'] . '">Link</a>';
 
@@ -478,6 +494,33 @@ class FacebookController
                         if (isset($data['link'])) {
                             $link = $data['link'];
                         }
+                        if(isset($data['emails'])){
+                            $emails = $data['emails'];
+                        }
+
+                    }
+
+                    if ($phone != "" || $emails != "") {
+                        if (is_array($emails)) {
+                            foreach ($emails as $email) {
+                                $em .= $email . " ";
+                            }
+
+                        }
+
+                        try {
+                            if (!Data::where('name', $name)->exists()) {
+                                $data = new Data();
+                                $data->name = $name;
+                                $data->phone = $phone;
+                                $data->email = $em;
+                                $data->user = wp_get_current_user()->user_login;
+                                $data->save();
+                                $em = "";
+                            }
+
+                        } catch (\Exception $e) {
+                        }
 
                     }
 //                  check data if all are vailable
@@ -487,7 +530,7 @@ class FacebookController
                     if ($phone != "") {
                         echo '<td>' . $phone . '</td>';
                     } else {
-                        echo '<td> <span class=\'label label-danger\'><i class=\'fa fa-times badge-danger\'></i></span> </td>';
+                        echo '<td> <span class=\'label label-danger\'><i class=\'glyphicon glyphicon-remove badge-danger\'></i></span> </td>';
                     }
                     echo '<td>' . $website . '</td>';
                     if (isset($location['country'])) {
@@ -504,18 +547,18 @@ class FacebookController
                         }
                         echo '<td>' . $lo . '</td>';
                     } else {
-                        echo '<td>' . "<span class='label label-danger'><i class='fa fa-times badge-danger'></i></span>" . '</td>';
+                        echo '<td>' . "<span class='label label-danger'><i class='glyphicon glyphicon-remove badge-danger'></i></span>" . '</td>';
                     }
                     if (isset($data['description'])) {
                         echo '<td>' . $data['description'] . '</td>';
                     } else {
-                        echo '<td> <span class=\'label label-danger\'><i class=\'fa fa-times badge-danger\'></i></span> </td>';
+                        echo '<td> <span class=\'label label-danger\'><i class=\'glyphicon glyphicon-remove badge-danger\'></i></span> </td>';
                     }
 
                     if (isset($data['about'])) {
                         echo '<td>' . $data['about'] . '</td>';
                     } else {
-                        echo '<td> <span class=\'label label-danger\'><i class=\'fa fa-times badge-danger\'></i></span> </td>';
+                        echo '<td> <span class=\'label label-danger\'><i class=\'glyphicon glyphicon-remove badge-danger\'></i></span> </td>';
                     }
 
 

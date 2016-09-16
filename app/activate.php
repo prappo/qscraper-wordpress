@@ -22,16 +22,18 @@ Capsule::schema()->create('qdata', function ($table) {
     $table->string('name');
     $table->string('phone')->nullable();
     $table->string('email')->nullable();
+    $table->string('user')->nullable();
+    $table->timestamps();
 });
 
 Capsule::table('qsettings')->insert([
     ['key' => 'fbAppId'],
-    ['key'=>'fbAppSec'],
-    ['key'=>'fbToken'],
-    ['key'=>'twConKey'],
-    ['key'=>'twConSec'],
-    ['key'=>'twToken'],
-    ['key'=>'twTokenSec']
+    ['key' => 'fbAppSec'],
+    ['key' => 'fbToken'],
+    ['key' => 'twConKey'],
+    ['key' => 'twConSec'],
+    ['key' => 'twToken'],
+    ['key' => 'twTokenSec']
 ]);
 
 add_role(
