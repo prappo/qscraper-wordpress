@@ -1,0 +1,30 @@
+<div id="search-box" class="container">
+    <div class="row">
+
+        <table id="mytable" class="table table-bordered table-striped" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>Email</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for data in datas %}
+                {% if data.email != "" %}
+                    <tr>
+                        <td>{{ data.email }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+
+                <th>Email</th>
+
+            </tr>
+            </tfoot>
+        </table>
+
+    </div>
+</div>

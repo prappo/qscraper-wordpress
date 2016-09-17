@@ -46,6 +46,9 @@ class SettingsController
 
     public function update(Http $re)
     {
+        if(wp_get_current_user()->roles[0] != 'administrator'){
+            return "Forbidden";
+        }
         try {
             Settings::where('key', 'fbAppId')->update(['value' => $re->fbAppId]);
             Settings::where('key', 'fbAppSec')->update(['value' => $re->fbAppSec]);
@@ -89,5 +92,12 @@ class SettingsController
 
         }
 
+    }
+
+    public static function date($string)
+    {
+        $s = $string;
+        $date = strtotime($s);
+        return date('d/M/Y', $date);
     }
 }

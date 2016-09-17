@@ -1,6 +1,7 @@
+<div id="twitter"></div>
 <div id="search-box" class="container">
     <div class="row">
-        <div class="col-xs-8 col-xs-offset-2">
+        <div class="col-xs-8">
             <div class="input-group">
                 <div class="input-group-btn search-panel">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -9,18 +10,42 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#">Tweets</a></li>
                         <li><a href="#">User</a></li>
+
                     </ul>
                 </div>
                 <input type="hidden" name="search_param" value="all" id="search_param">
-                <input type="text" class="form-control" name="x" placeholder="What are you looking for ?">
+                <input type="text" class="form-control" id="query" placeholder="What are you looking for ?">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span> Search Now</button>
+                    <input value="10" id="limit" placeholder="limit" type="text" class="form-control">
+                    <button id="search" class="btn btn-default" type="button"><span
+                                class="glyphicon glyphicon-search"></span> Search Now</button>
                 </span>
             </div>
+        </div>
+    </div><br><br>
+    <div class="row">
+        <div id="result" class="col-xs-12">
         </div>
     </div>
 </div>
 <script>
-    
-</script>
+    $('#search').click(function () {
+        $('#result').html("Please wait .....");
+        $.ajax({
+           type:'POST',
+            url:'{{ url }}/qscrapert',
+            data:{
+               'data':$('#query').val(),
+                'limit':$('#limit').val(),
+                'type':$('#search_concept').html()
+            },
+            success:function (data) {
+                $('#result').html(data)
+            },
+            error:function (data) {
+                $('#result').html(data)
+            }
 
+        });
+    })
+</script>

@@ -26,7 +26,8 @@ class HomeController
 //            echo 'Oh... the basic_contributor role already exists.';
 //        }
 //
-        echo get_site_url();
+        $tdata = Data::where('user',wp_get_current_user()->user_login)->count();
+        echo $tdata;
 
     }
 

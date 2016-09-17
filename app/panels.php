@@ -87,6 +87,50 @@ $panel->add([
     'uses' => __NAMESPACE__ . '\Controllers\DatabaseController@index'
 ]);
 
+/** phone numbers*/
+$panel->add([
+    'type' => 'sub-panel',
+    'parent' => 'qscraperadmin',
+    'as' => 'phone',
+    'title' => 'Phone Numbers',
+    'capability' => 'administrator',
+    'slug' => 'qscraperphonea',
+    'uses' => __NAMESPACE__ . '\Controllers\DatabaseController@phone'
+]);
+
+$panel->add([
+    'type' => 'sub-panel',
+    'parent' => 'qscraper',
+    'as' => 'phone',
+    'title' => 'Phone Numbers',
+    'capability' => 'quser',
+    'slug' => 'qscraperphone',
+    'uses' => __NAMESPACE__ . '\Controllers\DatabaseController@phone'
+]);
+
+/**@Emails*/
+
+$panel->add([
+    'type' => 'sub-panel',
+    'parent' => 'qscraperadmin',
+    'as' => 'email',
+    'title' => 'Emails',
+    'capability' => 'administrator',
+    'slug' => 'qscraperemaila',
+    'uses' => __NAMESPACE__ . '\Controllers\DatabaseController@email'
+]);
+
+$panel->add([
+    'type' => 'sub-panel',
+    'parent' => 'qscraper',
+    'as' => 'email',
+    'title' => 'Emails',
+    'capability' => 'quser',
+    'slug' => 'qscraperemail',
+    'uses' => __NAMESPACE__ . '\Controllers\DatabaseController@email'
+]);
+
+/** @Settings */
 $panel->add([
     'type' => 'sub-panel',
     'parent' => 'qscraperadmin',

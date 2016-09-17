@@ -1,6 +1,12 @@
 <div id="search-box" class="container">
     <div class="row">
 
+        <button class="btn btn-danger" id="delall">Delete all data</button>
+        <br><br>
+
+    </div>
+    <div class="row">
+
         <table id="mytable" class="table table-bordered table-striped" cellspacing="0" width="100%">
             <thead>
             <tr>
@@ -33,3 +39,35 @@
 
     </div>
 </div>
+<script>
+    $('#delall').click(function () {
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to delete all data!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete all",
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+        }, function () {
+            $.ajax({
+            type:'POST',
+                url:'{{ url }}/qsdeldata',
+                data:{},
+                success:function (data) {
+                    if(data=='success'){
+                        swal('Success','All data deleted','success');
+                        location.reload();
+                    }
+                    else{
+                        swal('Error',data,'error');
+                    }
+                },
+                error:function (data) {
+                    swal('Error',data,'error');
+                }
+            });
+        });
+    });
+</script>

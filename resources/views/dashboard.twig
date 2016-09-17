@@ -3,28 +3,42 @@
         <div class="panel-body">
             <h3><i class="glyphicon glyphicon-floppy-disk"></i></h3>
             <h3>Total Data <span class="badge">{{ tdata }}</span></h3>
-            <button class="btn btn-xs btn-success"><i class="glyphicon glyphicon-download"></i> Export Now</button>
+            <a href="{% if isAdmin %}admin.php?page=qscraperdatabaseaa{% else %}admin.php?page=qscraperdatabase{% endif %}"
+               class="btn btn-xs btn-success"><i
+                        class="glyphicon glyphicon-download"></i> Export Now</a>
         </div>
     </div>
     <div class="col-md-3">
         <div class="panel-body">
             <h3><i class="glyphicon glyphicon-envelope"></i></h3>
             <h3>Total Emails <span class="badge">{{ temail }}</span></h3>
-            <button class="btn btn-xs btn-success"><i class="glyphicon glyphicon-download"></i> Export Now</button>
+            <a href="{% if isAdmin %}admin.php?page=qscraperemaila{% else %}admin.php?page=qscraperemail{% endif %}"
+               class="btn btn-xs btn-success"><i class="glyphicon glyphicon-download"></i> Export Now</a>
         </div>
     </div>
     <div class="col-md-3">
         <div class="panel-body">
             <h3><i class="glyphicon glyphicon-earphone"></i></h3>
             <h3>Phone Numbers <span class="badge">{{ tphone }}</span></h3>
-            <button class="btn btn-xs btn-success"><i class="glyphicon glyphicon-download"></i> Export Now</button>
+            <a href="{% if isAdmin %}admin.php?page=qscraperphonea{% else %}admin.php?page=qscraperphone{% endif %}"
+               class="btn btn-xs btn-success"><i class="glyphicon glyphicon-download"></i> Export Now</a>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="panel-body">
-            <h3><i class="glyphicon glyphicon-user"></i></h3>
-            <h3>Total Users <span class="badge">{{ usercount }}</span></h3>
-            <a href="users.php" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-eye-open"></i> View</a>
+    {% if isAdmin %}
+        <div class="col-md-3">
+            <div class="panel-body">
+                <h3><i class="glyphicon glyphicon-user"></i></h3>
+                <h3>Total Users <span class="badge">{{ usercount }}</span></h3>
+                <a href="users.php" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-eye-open"></i> View</a>
+            </div>
         </div>
-    </div>
+    {% else %}
+        <div class="col-md-3">
+            <div class="panel-body">
+                <h3><i class="glyphicon glyphicon-user"></i></h3>
+                <h3>{{ username }}</h3>
+                <a href="profile.php" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-eye-open"></i> View Profile</a>
+            </div>
+        </div>
+    {% endif %}
 </div>
