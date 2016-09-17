@@ -22,7 +22,8 @@
                 </span>
             </div>
         </div>
-    </div><br><br>
+    </div>
+    <br><br>
     <div class="row">
         <div id="result" class="col-xs-12">
         </div>
@@ -32,17 +33,17 @@
     $('#search').click(function () {
         $('#result').html("Please wait .....");
         $.ajax({
-           type:'POST',
-            url:'{{ url }}/qscrapert',
-            data:{
-               'data':$('#query').val(),
-                'limit':$('#limit').val(),
-                'type':$('#search_concept').html()
+            type: 'POST',
+            url: '{{ url }}/qscrapert',
+            data: {
+                'data': $('#query').val(),
+                'limit': $('#limit').val(),
+                'type': $('#search_concept').html()
             },
-            success:function (data) {
+            success: function (data) {
                 $('#result').html(data)
             },
-            error:function (data) {
+            error: function (data) {
                 $('#result').html(data)
             }
 

@@ -10,18 +10,22 @@ use MyPlugin\Models\Settings;
 
 class SettingsController
 {
+    /**
+     * @param $string
+     * @return mixed
+     */
     public static function get($string)
     {
         $data = Capsule::table('qsettings')->where('key', $string)->value('value');
         return $data;
     }
 
+    /**
+     * @return string
+     */
     public function index()
     {
-
         session_start();
-
-
         $url = get_site_url();
         try {
             $fb = new Facebook([
@@ -44,6 +48,10 @@ class SettingsController
         return view('@MyPlugin/settings.twig', ['fbAppId' => $fbAppId, 'fbAppSec' => $fbAppSec, 'twConKey' => $twConKey, 'twConSec' => $twConSec, 'twToken' => $twToken, 'twTokenSec' => $twTokenSec, 'url' => $url, 'fburl' => $loginUrl]);
     }
 
+    /**
+     * @param Http $re
+     * @return string
+     */
     public function update(Http $re)
     {
         if(wp_get_current_user()->roles[0] != 'administrator'){
@@ -60,9 +68,11 @@ class SettingsController
         } catch (\Exception $e) {
             return $e->getMessage();
         }
-
     }
 
+    /**
+     * @return string
+     */
     public function fbConnect()
     {
         session_start();
@@ -94,6 +104,10 @@ class SettingsController
 
     }
 
+    /**
+     * @param $string
+     * @return bool|string
+     */
     public static function date($string)
     {
         $s = $string;

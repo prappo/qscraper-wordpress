@@ -1,6 +1,6 @@
 <?php namespace MyPlugin;
 
-/** @var \Herbert\Framework\Panel $panel */
+
 /** @Dashboard */
 $panel->add([
     'type' => 'panel',

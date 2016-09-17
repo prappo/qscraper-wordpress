@@ -8,26 +8,32 @@ use MyPlugin\Models\Data;
 
 class FacebookController
 {
+    /**
+     * @return string
+     */
     public function index()
     {
         $url = get_site_url();
         return view('@MyPlugin/facebook.twig', ['url' => $url]);
     }
 
+    /**
+     * @param Http $re
+     * @return string
+     */
     public function scraper(Http $re)
     {
-        if(SettingsController::get('fbToken') == ""){
+        if (SettingsController::get('fbToken') == "") {
             return "Facebook Token not found . Please go to <a href='admin.php?page=qscrapersettings'>settings page</a>";
         }
 
-        if(SettingsController::get('fbAppSec') == ""){
+        if (SettingsController::get('fbAppSec') == "") {
             return "Facebook App secret not found . Please go to <a href='admin.php?page=qscrapersettings'>settings page</a>";
         }
 
-        if(SettingsController::get('fbAppId') == ""){
+        if (SettingsController::get('fbAppId') == "") {
             return "Facebook App Id not found . Please go to <a href='admin.php?page=qscrapersettings'>settings page</a>";
         }
-
 
 
         $query = $re->data;
@@ -494,7 +500,7 @@ class FacebookController
                         if (isset($data['link'])) {
                             $link = $data['link'];
                         }
-                        if(isset($data['emails'])){
+                        if (isset($data['emails'])) {
                             $emails = $data['emails'];
                         }
 

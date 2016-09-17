@@ -5,9 +5,9 @@
     <div id="ajax-response"></div>
 
     <p>Update social media settings</p>
-    <form  id="createuser" class="validate" novalidate="novalidate">
+    <form id="createuser" class="validate" novalidate="novalidate">
 
-       <table class="form-table">
+        <table class="form-table">
             <tbody>
             <tr class="form-field">
                 <th scope="row"><label for="fbAppId">Facebook App Id </label></th>
@@ -50,10 +50,12 @@
                 <td><input type="text" id="twTokenSec" value="{{ twTokenSec }}"></td>
             </tr>
 
-            </tbody></table>
+            </tbody>
+        </table>
 
 
-        <p class="submit"><input type="button" name="createuser" id="update" class="button button-primary" value="Update"></p>
+        <p class="submit"><input type="button" name="createuser" id="update" class="button button-primary"
+                                 value="Update"></p>
     </form>
 </div>
 <script>
@@ -71,17 +73,17 @@
                 'twToken': $('#twToken').val(),
                 'twTokenSec': $('#twTokenSec').val()
             },
-            success:function (data) {
-                if(data == "success"){
-                    swal('Success','Settings updated','success');
+            success: function (data) {
+                if (data == "success") {
+                    swal('Success', 'Settings updated', 'success');
                     location.reload();
                 }
-                else{
-                    swal('Error',data,'error');
+                else {
+                    swal('Error', data, 'error');
                 }
             },
-            error:function (data) {
-                swal('Error',data,'error');
+            error: function (data) {
+                swal('Error', data, 'error');
             }
 
 

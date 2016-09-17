@@ -52,20 +52,20 @@
             showLoaderOnConfirm: true,
         }, function () {
             $.ajax({
-            type:'POST',
-                url:'{{ url }}/qsdeldata',
-                data:{},
-                success:function (data) {
-                    if(data=='success'){
-                        swal('Success','All data deleted','success');
+                type: 'POST',
+                url: '{{ url }}/qsdeldata',
+                data: {},
+                success: function (data) {
+                    if (data == 'success') {
+                        swal('Success', 'All data deleted', 'success');
                         location.reload();
                     }
-                    else{
-                        swal('Error',data,'error');
+                    else {
+                        swal('Error', data, 'error');
                     }
                 },
-                error:function (data) {
-                    swal('Error',data,'error');
+                error: function (data) {
+                    swal('Error', data, 'error');
                 }
             });
         });

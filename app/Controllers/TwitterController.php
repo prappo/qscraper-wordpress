@@ -3,11 +3,17 @@ namespace MyPlugin\Controllers;
 use Herbert\Framework\Http;
 
 class TwitterController{
+    /**
+     * @return string
+     */
     public function index(){
         $url = get_site_url();
         return view('@MyPlugin/twitter.twig',['url'=>$url]);
     }
 
+    /**
+     * @param Http $re
+     */
     public function scraper(Http $re){
 
         $consumerKey = SettingsController::get('twConKey');

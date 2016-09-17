@@ -3,6 +3,9 @@ namespace MyPlugin\Controllers;
 use MyPlugin\Models\Data;
 
 class DatabaseController{
+    /**
+     * @return string
+     */
     public function index(){
         $url = get_site_url();
         $user = wp_get_current_user()->user_login;
@@ -17,6 +20,9 @@ class DatabaseController{
         return view('@MyPlugin/database.twig',['datas'=>$datas,'url'=>$url]);
     }
 
+    /**
+     * @return string
+     */
     public function phone(){
         $user = wp_get_current_user()->user_login;
         $role =  wp_get_current_user()->roles[0];
@@ -30,6 +36,9 @@ class DatabaseController{
         return view('@MyPlugin/phone.twig',['datas'=>$datas]);
     }
 
+    /**
+     * @return string
+     */
     public function email(){
         $user = wp_get_current_user()->user_login;
         $role =  wp_get_current_user()->roles[0];
@@ -43,6 +52,9 @@ class DatabaseController{
         return view('@MyPlugin/email.twig',['datas'=>$datas]);
     }
 
+    /**
+     * @return string
+     */
     public function delete(){
         $user = wp_get_current_user()->user_login;
         $role =  wp_get_current_user()->roles[0];

@@ -24,7 +24,8 @@
                 </span>
             </div>
         </div>
-    </div><br><br>
+    </div>
+    <br><br>
     <div class="row">
         <div id="result" class="col-xs-12">
         </div>
@@ -34,7 +35,7 @@
 
 
     $('#search').click(function () {
-        if($('#search_concept').html() == "Search by"){
+        if ($('#search_concept').html() == "Search by") {
             return swal("Please select a category");
         }
         $('#result').html("Please wait....");
@@ -46,11 +47,11 @@
                 'type': $('#search_concept').html(),
                 'limit': $('#limit').val(),
             },
-            success:function (data) {
+            success: function (data) {
                 $('#result').html(data);
             },
-            error:function (data) {
-                swal('Error',data,'error');
+            error: function (data) {
+                swal('Error', data, 'error');
             }
 
 
